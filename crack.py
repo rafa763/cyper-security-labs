@@ -1,3 +1,4 @@
+import sys
 # Get the shadow from the user
 shadow = input("shadow:")
 
@@ -10,8 +11,12 @@ with open("hash.txt", "r") as file:
     for line in file:
         counter += 1
         # Compare the hash with the shadow
-        if line.strip() == shadow:
+        if line.strip() == shadow.strip():
+            print(counter)
             break
+    if counter == 100000:
+        print("Not found, this hash is for a certain salt, try checking the salt")
+        sys.exit(1)
 # Counter to comapre with the first
 linecount = 0
 # Open the file with the passwords
@@ -23,3 +28,4 @@ with open("password.txt", "r") as file2:
         if (linecount == counter):
             # Print the password
             print(line)
+            break
